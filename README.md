@@ -29,7 +29,7 @@ The sanctioned addresses can be extracted with this tool from the
 The SDN list as XML file (~55 MB in Feb. 2021) can be downloaded, for example,
 via `wget`:
 
-``` bash
+``` console
 $ wget https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml
 ```
 
@@ -41,16 +41,16 @@ located in the current working directory. This can be changed with the
 
 By default, the `XBT` (Bitcoin) addresses are extracted into a `TXT` file:
 
-``` bash
+``` console
 $ python3 generate-address-list.py
 $ cat sanctioned_addresses_XBT.txt | head -n2
 12QtD5BFwRsdNsAZY76UVE1xyCGNTojH9h
 1Kuf2Rd8mDyAViwBozGTNYnvWL8uYFrkVo
 ```
 
-Other assets an be selected by supplying the short codes as positional:
+Other assets an be selected by supplying the tickers:
 
-``` bash
+``` console
 $ python3 generate-address-list.py ETH ETC DASH LTC
 $ ls sanctioned_addresses_* -1
 sanctioned_addresses_DASH.txt
@@ -64,15 +64,19 @@ sanctioned_addresses_LTC.txt
 By default, a `TXT` file listing an address per line is produced. For example,
 a JSON file listing the addresses can be produced with the `-f JSON` flag.
 
-``` bash
+``` console
 $ python3 generate-address-list.py XMR -f JSON
 $ ls sanctioned_addresses_* -1
 sanctioned_addresses_XMR.json
 ```
 
+---
+
+For detailed help and usage instructions please see `python3 generate-address-list.py --help`
+
 ## License and Warranty
 
 This software is provided under the MIT License. For details see [LICENSE](LICENSE).
 
-The author does not provide warranty of any kind on the completeness and
-correctness of the software outputs.
+The author does not provide warranty of any kind. Especially not on the
+completeness and correctness of the produced lists.
