@@ -1,0 +1,45 @@
+# This workflow will generate and update the lists in the 'lists' branch each night at 0 UTC
+
+name: Generate OFAC sanctioned digital currency addresses lists each night at 0 UTC
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+  pull_request:
+
+jobs:
+  generate-lists:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Download the sdn_advanced.xml file
+      uses: wei/wget@v1
+      with:
+        args: https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml
+    - name: Generate TXT and JSON files for all assets
+      run: |
+        mkdir data
+        python3 generate-address-list.py XBT ETH XMR LTC ZEC DASH BTG ETC BSV -f JSON TXT -path ./data
+    - name: Commit files
+      run: |
+        git config --local user.email "45324+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git checkout lists
+        mv data/* .
+        git add sanctioned_addresses_* -f
+        git commit -m "Automatically updated lists: $(date)" -a || true
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: lists

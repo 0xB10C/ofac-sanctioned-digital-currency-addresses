@@ -24,6 +24,12 @@ The sanctioned addresses can be extracted with this tool from the
 - `TXT` file format (one address per line)
 - `JSON` file containing a list of addresses
 
+## Automatically Updated Lists
+
+The [`lists`](/tree/lists) branch of this repository contains automatically
+updated lists of sanctioned addresses for each covered asset. These are
+generated each night at 0 UTC by a GitHub Actions workflow.
+
 ## Usage Examples
 
 The SDN list as XML file (~55 MB in Feb. 2021) can be downloaded, for example,
