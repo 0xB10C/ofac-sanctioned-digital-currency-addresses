@@ -4,6 +4,7 @@ import xml.etree.ElementTree as ET
 import argparse
 import pathlib
 import json
+import pandas as pd
 
 FEATURE_TYPE_TEXT = "Digital Currency Address - "
 NAMESPACE = {'sdn': 'http://www.un.org/sanctions/1.0'}
@@ -14,7 +15,7 @@ POSSIBLE_ASSETS = ["XBT", "ETH", "XMR",
                    "LTC", "ZEC", "DASH", "BTG", "ETC", "BSV"]
 
 # List of implemented output formats
-OUTPUT_FORMATS = ["TXT", "JSON"]
+OUTPUT_FORMATS = ["TXT", "JSON", "CSV"]
 
 
 def parse_arguments():
@@ -61,6 +62,8 @@ def write_addresses(addresses, asset, output_formats, outpath):
         write_addresses_txt(addresses, asset, outpath)
     if "JSON" in output_formats:
         write_addresses_json(addresses, asset, outpath)
+    if "CSV" in output_formats:
+        write_addresses_csv(addresses, asset, outpath)
 
 
 def write_addresses_txt(addresses, asset, outpath):
@@ -73,6 +76,11 @@ def write_addresses_json(addresses, asset, outpath):
     with open("{}/sanctioned_addresses_{}.json".format(outpath, asset), 'w') as out:
         out.write(json.dumps(addresses, indent=2)+"\n")
 
+def write_addresses_csv(addresses, asset, outpath):
+    with open("sanctioned_addresses_" + asset + ".csv", 'a') as out:
+        dict = {'OFAC Sanctioned ' + asset +  ' Address List': addresses}
+        df = pd.DataFrame(dict)
+        df.to_csv(out, index=False)
 
 def main():
     args = parse_arguments()
