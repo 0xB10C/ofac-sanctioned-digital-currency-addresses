@@ -98,6 +98,8 @@ def main():
 
         # deduplicate addresses
         addresses = list(dict.fromkeys(addresses).keys())
+        # sort addresses
+        addresses.sort()
 
         write_addresses(addresses, asset, output_formats, args.outpath)
 
