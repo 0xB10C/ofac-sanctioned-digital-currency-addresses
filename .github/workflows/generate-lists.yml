@@ -5,6 +5,8 @@ name: Generate OFAC sanctioned digital currency addresses lists each night at 0 
 on:
   schedule:
     - cron: '0 0 * * *'
+  workflow_dispatch:
+
 
 jobs:
   generate-lists:
@@ -27,7 +29,7 @@ jobs:
     - name: Generate TXT and JSON files for all assets
       run: |
         mkdir data
-        python3 generate-address-list.py XBT ETH XMR LTC ZEC DASH BTG ETC BSV -f JSON TXT -path ./data
+        python3 generate-address-list.py XBT ETH XMR LTC ZEC DASH BTG ETC BSV BCH XVG USDT XRP ARB BSC -f JSON TXT -path ./data
     - name: Commit files
       run: |
         git config --local user.email "45324+github-actions[bot]@users.noreply.github.com"
