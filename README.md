@@ -8,7 +8,7 @@ here: [`sdn_advanced.xml`][2].
 [1]: https://home.treasury.gov/policy-issues/financial-sanctions/specially-designated-nationals-and-blocked-persons-list-sdn-human-readable-lists
 [2]: https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml
 
-As of February 2021 the SDN list covers the following assets:
+As of May 2023 the SDN list covers the following assets:
 - XBT (Bitcoin)
 - ETH (Ethereum)
 - XMR (Monero)
@@ -17,7 +17,13 @@ As of February 2021 the SDN list covers the following assets:
 - DASH (Dash)
 - BTG (Bitcoin Gold)
 - ETC (Ethereum Classic)
-- BSV ( Bitcoin Satoshi Vision)
+- BSV (Bitcoin Satoshi Vision)
+- BCH (Bitcoin Cash)
+- XVG (Verge)
+- USDT (USD Tether)
+- XRP (Ripple)
+- ARB (Arbitrum)
+- BSC (Binance Smart Chain)
 
 The sanctioned addresses can be extracted with this tool from the
 [`sdn_advanced.xml`][2] file. The tools supports the following output formats:
@@ -32,7 +38,7 @@ generated each night at 0 UTC by a GitHub Actions workflow.
 
 ## Usage Examples
 
-The SDN list as XML file (~55 MB in Feb. 2021) can be downloaded, for example,
+The SDN list as XML file (~80 MB in May 2023) can be downloaded, for example,
 via `wget`:
 
 ``` console
