@@ -27,6 +27,7 @@ an issue or pull-request adding assets.
 - USDC (USD Coin)
 - USDT (USD Tether)
 - XRP (Ripple)
+- TRX (Tron)
 - ARB (Arbitrum)
 - BSC (Binance Smart Chain)
 
