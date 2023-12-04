@@ -8,7 +8,11 @@ here: [`sdn_advanced.xml`][2].
 [1]: https://home.treasury.gov/policy-issues/financial-sanctions/specially-designated-nationals-and-blocked-persons-list-sdn-human-readable-lists
 [2]: https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml
 
-As of May 2023 the SDN list covers the following assets:
+As of December 2023 the tool covers the following assets. There might be assets
+on the SDN list that aren't covered yet. These can be found by grepping for
+"Digital Currency Address" on the `sdn_advanced.xml` file. Feel free to submit
+an issue or pull-request adding assets.
+
 - XBT (Bitcoin)
 - ETH (Ethereum)
 - XMR (Monero)
@@ -20,6 +24,7 @@ As of May 2023 the SDN list covers the following assets:
 - BSV (Bitcoin Satoshi Vision)
 - BCH (Bitcoin Cash)
 - XVG (Verge)
+- USDC (USD Coin)
 - USDT (USD Tether)
 - XRP (Ripple)
 - ARB (Arbitrum)
