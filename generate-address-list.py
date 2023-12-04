@@ -11,7 +11,7 @@ NAMESPACE = {'sdn': 'http://www.un.org/sanctions/1.0'}
 # List of assets that have been sanctioned by the OFAC.
 # Possible assets be seen by grepping the sdn_advanced.xml file for "Digital Currency Address".
 POSSIBLE_ASSETS = ["XBT", "ETH", "XMR", "LTC", "ZEC", "DASH", "BTG", "ETC",
-                   "BSV", "BCH", "XVG", "USDT", "XRP", "ARB", "BSC"]
+                   "BSV", "BCH", "XVG", "USDT", "XRP", "ARB", "BSC", "USDC"]
 
 # List of implemented output formats
 OUTPUT_FORMATS = ["TXT", "JSON"]
