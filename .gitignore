@@ -128,5 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+.idea
+
 sanctioned_addresses_*
 sdn_advanced.xml
