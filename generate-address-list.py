@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import xml.etree.ElementTree as ET
 import argparse
 import pathlib
@@ -15,7 +14,7 @@ POSSIBLE_ASSETS = ["XBT", "ETH", "XMR", "LTC", "ZEC", "DASH", "BTG", "ETC",
                    "TRX"]
 
 # List of implemented output formats
-OUTPUT_FORMATS = ["TXT", "JSON"]
+OUTPUT_FORMATS = ["TXT", "JSON", "CSV"]
 
 
 def parse_arguments():
@@ -29,8 +28,19 @@ def parse_arguments():
                         default=OUTPUT_FORMATS[0], help='the output file format of the address list (default: TXT)')
     parser.add_argument('-path', '--output-path', dest='outpath',  type=pathlib.Path, default=pathlib.Path(
         "./"), help='the path where the lists should be written to (default: current working directory ("./")')
+    parser.add_argument('-a', '--aggregated',  dest='aggregated', type=str2bool, nargs='?',
+                        const=True,  help='provide aggregated list of all addresses in csv')
     return parser.parse_args()
 
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
 
 def feature_type_text(asset):
     """returns text we expect in a <FeatureType></FeatureType> tag for a given asset"""
@@ -62,6 +72,8 @@ def write_addresses(addresses, asset, output_formats, outpath):
         write_addresses_txt(addresses, asset, outpath)
     if "JSON" in output_formats:
         write_addresses_json(addresses, asset, outpath)
+    if "CSV" in output_formats:
+        write_addresses_csv(addresses, asset, outpath)
 
 
 def write_addresses_txt(addresses, asset, outpath):
@@ -74,6 +86,10 @@ def write_addresses_json(addresses, asset, outpath):
     with open("{}/sanctioned_addresses_{}.json".format(outpath, asset), 'w') as out:
         out.write(json.dumps(addresses, indent=2)+"\n")
 
+def write_addresses_csv(addresses, asset, outpath):
+    with open("{}/sanctioned_addresses_{}.csv".format(outpath, asset), 'w') as out:
+        for address in addresses:
+            out.write(address+";\n")
 
 def main():
     args = parse_arguments()
@@ -86,12 +102,21 @@ def main():
         assets.append(args.assets)
     else:
         assets = args.assets
+    if args.aggregated:
+        all_data_csv = list()
+        full = True
+        assets = POSSIBLE_ASSETS
+    else:
+        full = False
+        all_data_csv = None
 
     output_formats = list()
     if type(args.format) == str:
         output_formats.append(args.format)
     else:
         output_formats = args.format
+
+
 
     for asset in assets:
         address_id = get_address_id(root, asset)
@@ -101,9 +126,13 @@ def main():
         addresses = list(dict.fromkeys(addresses).keys())
         # sort addresses
         addresses.sort()
-
-        write_addresses(addresses, asset, output_formats, args.outpath)
-
+        if not full:
+            write_addresses(addresses, asset, output_formats, args.outpath)
+        else:
+            for address in addresses:
+                all_data_csv.append(address + ";" + asset)
+    if full:
+        write_addresses(all_data_csv, "all", output_formats, args.outpath)
 
 if __name__ == "__main__":
     main()

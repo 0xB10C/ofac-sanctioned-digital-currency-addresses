@@ -7,6 +7,7 @@ here: [`sdn_advanced.xml`][2].
 
 [1]: https://home.treasury.gov/policy-issues/financial-sanctions/specially-designated-nationals-and-blocked-persons-list-sdn-human-readable-lists
 [2]: https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml
+[3]: https://ofac.treasury.gov/specially-designated-nationals-list-data-formats-data-schemas
 
 As of December 2023 the tool covers the following assets. There might be assets
 on the SDN list that aren't covered yet. These can be found by grepping for
@@ -35,6 +36,7 @@ The sanctioned addresses can be extracted with this tool from the
 [`sdn_advanced.xml`][2] file. The tools supports the following output formats:
 - `TXT` file format (one address per line)
 - `JSON` file containing a list of addresses
+- `CSV` file containing a list of addresses
 
 ## Automatically Updated Lists
 
