@@ -32,7 +32,7 @@ an issue or pull-request adding assets.
 - BSC (Binance Smart Chain)
 
 The sanctioned addresses can be extracted with this tool from the
-[`sdn_advanced.xml`][2] file. The tools supports the following output formats:
+[`sdn_advanced.xml`][2] file. The tool supports the following output formats:
 - `TXT` file format (one address per line)
 - `JSON` file containing a list of addresses
 
@@ -66,7 +66,7 @@ $ cat sanctioned_addresses_XBT.txt | head -n2
 1Kuf2Rd8mDyAViwBozGTNYnvWL8uYFrkVo
 ```
 
-Other assets an be selected by supplying the tickers:
+Other assets can be selected by supplying the tickers:
 
 ``` console
 $ python3 generate-address-list.py ETH ETC DASH LTC
