@@ -23,13 +23,14 @@ jobs:
       with:
         python-version: 3.11
     - name: Download the sdn_advanced.xml file
-      uses: wei/wget@v1
-      with:
-        args: https://www.treasury.gov/ofac/downloads/sanctions/1.0/sdn_advanced.xml
+      run: |
+        wget https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN_ADVANCED.ZIP
+        unzip SDN_ADVANCED.ZIP
+        ls -l
     - name: Generate TXT and JSON files for all assets
       run: |
         mkdir data
-        python3 generate-address-list.py XBT ETH XMR LTC ZEC DASH BTG ETC BSV BCH XVG USDC USDT XRP TRX ARB BSC -f JSON TXT -path ./data
+        python3 generate-address-list.py XBT ETH XMR LTC ZEC DASH BTG ETC BSV BCH XVG USDC USDT XRP TRX ARB BSC -f JSON TXT -path ./data -sdn SDN_ADVANCED.XML
     - name: Commit files
       run: |
         git config --local user.email "45324+github-actions[bot]@users.noreply.github.com"
