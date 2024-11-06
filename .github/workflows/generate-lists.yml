@@ -4,7 +4,7 @@ name: Generate OFAC sanctioned digital currency addresses lists each night at 0 
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '24 1 * * *'
   workflow_dispatch:
 
 
