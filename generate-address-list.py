@@ -12,7 +12,7 @@ NAMESPACE = {'sdn': 'https://sanctionslistservice.ofac.treas.gov/api/Publication
 # Possible assets be seen by grepping the sdn_advanced.xml file for "Digital Currency Address".
 POSSIBLE_ASSETS = ["XBT", "ETH", "XMR", "LTC", "ZEC", "DASH", "BTG", "ETC",
                    "BSV", "BCH", "XVG", "USDT", "XRP", "ARB", "BSC", "USDC",
-                   "TRX"]
+                   "TRX", "SOL"]
 
 # List of implemented output formats
 OUTPUT_FORMATS = ["TXT", "JSON"]

@@ -30,7 +30,7 @@ jobs:
     - name: Generate TXT and JSON files for all assets
       run: |
         mkdir data
-        python3 generate-address-list.py XBT ETH XMR LTC ZEC DASH BTG ETC BSV BCH XVG USDC USDT XRP TRX ARB BSC -f JSON TXT -path ./data -sdn SDN_ADVANCED.XML
+        python3 generate-address-list.py XBT ETH XMR LTC ZEC DASH BTG ETC BSV BCH XVG USDC USDT XRP TRX ARB BSC SOL -f JSON TXT -path ./data -sdn SDN_ADVANCED.XML
     - name: Commit files
       run: |
         git config --local user.email "45324+github-actions[bot]@users.noreply.github.com"
