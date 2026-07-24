@@ -31,6 +31,7 @@ an issue or pull-request adding assets.
 - ARB (Arbitrum)
 - BSC (Binance Smart Chain)
 - SOL (Solana)
+- DOGE (Dogecoin)
 
 The sanctioned addresses can be extracted with this tool from the
 [`sdn_advanced.xml`][2] file. The tool supports the following output formats:
