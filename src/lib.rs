@@ -378,10 +378,9 @@ fn find_address_id(doc: &Document<'_>, asset: Asset) -> Result<String, Box<dyn E
             && node
                 .ancestors()
                 .any(|ancestor| ancestor.has_tag_name("FeatureTypeValues"))
+            && let Some(id) = node.attribute("ID")
         {
-            if let Some(id) = node.attribute("ID") {
-                return Ok(id.to_string());
-            }
+            return Ok(id.to_string());
         }
     }
 
