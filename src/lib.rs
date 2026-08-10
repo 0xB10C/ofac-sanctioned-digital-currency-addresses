@@ -568,6 +568,11 @@ mod tests {
         dedupe_preserve_order(&mut addresses);
         addresses.sort();
 
+        eprintln!(
+            "asset={} feature_type_id={id} addresses={addresses:?}",
+            Asset::Xbt
+        );
+
         assert_eq!(id, "123");
         assert_eq!(addresses, vec!["a".to_string(), "b".to_string()]);
     }
@@ -589,6 +594,12 @@ mod tests {
             &base,
         )
         .unwrap();
+
+        eprintln!(
+            "wrote {} and {}",
+            base.join("sanctioned_addresses_XBT.txt").display(),
+            base.join("sanctioned_addresses_XBT.json").display()
+        );
 
         assert_eq!(
             fs::read_to_string(base.join("sanctioned_addresses_XBT.txt")).unwrap(),
@@ -614,6 +625,7 @@ mod tests {
         .unwrap()
         {
             Command::Fetch(args) => {
+                eprintln!("fetch output={} url={}", args.output.display(), args.url);
                 assert_eq!(args.output, PathBuf::from("custom.xml"));
                 assert_eq!(args.url, "https://example.invalid/archive.zip");
             }
@@ -634,6 +646,13 @@ mod tests {
         .unwrap()
         {
             Command::Generate(args) => {
+                eprintln!(
+                    "generate assets={:?} sdn={} formats={:?} outpath={}",
+                    args.assets,
+                    args.sdn.display(),
+                    args.output_formats,
+                    args.outpath.display()
+                );
                 assert_eq!(args.assets, vec![Asset::Eth, Asset::Xbt]);
                 assert_eq!(args.sdn, PathBuf::from("input.xml"));
                 assert_eq!(
@@ -661,6 +680,7 @@ mod tests {
         }
 
         let xml = extract_first_xml(buffer.get_ref()).unwrap();
+        eprintln!("extracted xml bytes={}", xml.len());
         assert_eq!(xml, b"<root>ok</root>");
     }
 
@@ -708,6 +728,12 @@ mod tests {
             outpath: out.clone(),
         };
         generate_address_lists(&args).unwrap();
+
+        eprintln!(
+            "generated files in {} for assets={:?}",
+            out.display(),
+            args.assets
+        );
 
         assert_eq!(
             fs::read_to_string(out.join("sanctioned_addresses_XBT.txt")).unwrap(),
