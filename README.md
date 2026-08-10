@@ -56,6 +56,15 @@ By default, the python script expects the [`sdn_advanced.xml`][2] XML file to be
 located in the current working directory. This can be changed with the
 `-sdn /path/to/sdn_advanced.xml` argument.
 
+To download the current XML file without using `wget` or `unzip`, run:
+
+``` console
+$ python3 generate-address-list.py fetch
+```
+
+By default this writes `sdn_advanced.xml` in the current directory. Use
+`-o /path/to/sdn_advanced.xml` to choose another location.
+
 ---
 
 By default, the `XBT` (Bitcoin) addresses are extracted into a `TXT` file:
