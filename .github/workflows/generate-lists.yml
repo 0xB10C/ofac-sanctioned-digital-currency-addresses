@@ -22,15 +22,14 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: 3.11
+    - name: Create virtual environment
+      run: python3 -m venv .venv
     - name: Download the sdn_advanced.xml file
-      run: |
-        wget https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN_ADVANCED.ZIP
-        unzip SDN_ADVANCED.ZIP
-        ls -l
+      run: .venv/bin/python generate-address-list.py fetch -o SDN_ADVANCED.XML
     - name: Generate TXT and JSON files for all assets
       run: |
-        mkdir data
-        python3 generate-address-list.py XBT ETH XMR LTC ZEC DASH BTG ETC BSV BCH XVG USDC USDT XRP TRX ARB BSC SOL -f JSON TXT -path ./data -sdn SDN_ADVANCED.XML
+        mkdir -p data
+        .venv/bin/python generate-address-list.py XBT ETH XMR LTC ZEC DASH BTG ETC BSV BCH XVG USDC USDT XRP TRX ARB BSC SOL -f JSON TXT -path ./data -sdn SDN_ADVANCED.XML
     - name: Commit files
       run: |
         git config --local user.email "45324+github-actions[bot]@users.noreply.github.com"
